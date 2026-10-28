@@ -24,3 +24,17 @@
 .hero-foot{margin-top:clamp(36px,7vh,80px)}
 @media(max-width:900px){.hero{min-height:calc(100svh - 72px);padding:0 5%}.hero-copy{min-height:calc(100svh - 72px);max-width:650px}.hero-art{min-height:0;height:auto;margin:0}}
 @media(max-width:650px){.hero{min-height:calc(100svh - 66px);padding:0 22px}.hero-copy{min-height:calc(100svh - 66px);padding:65px 0 26px;justify-content:center}.hero-art{position:absolute;inset:0;min-height:0;height:auto;margin:0;background-position:58% center}.hero-art:before{background:linear-gradient(90deg,rgba(10,11,9,.88),rgba(10,11,9,.52) 68%,rgba(10,11,9,.28)),linear-gradient(0deg,rgba(10,11,9,.78),transparent 40%,rgba(10,11,9,.18));}.hero-foot{margin-top:38px}.hero-art .art-caption{right:22px;bottom:18px;left:22px;font-size:8px}}
+
+
+/* Oversized AI filmmaker hero typography */
+.hero-copy{max-width:none;width:100%;padding-top:clamp(38px,7vh,80px);padding-bottom:28px;justify-content:center}
+.hero-title{display:flex;flex-direction:column;align-items:flex-start;width:100%;margin:0;font-family:var(--sans);font-size:clamp(76px,13.8vw,190px);font-weight:700;line-height:.88;letter-spacing:-.075em;text-transform:uppercase;color:#fff}
+.hero-title span{display:block;white-space:nowrap}
+.hero-title span:first-child{font-size:1.05em}
+.hero-title span:last-child{font-size:.93em;letter-spacing:-.065em}
+.hero-name{margin:22px 0 0;font-size:clamp(20px,3.2vw,43px);line-height:1.05;font-weight:700;letter-spacing:-.045em;color:#fff}
+.hero .eyebrow,.hero .intro,.hero .hero-actions{position:relative;z-index:2}
+.hero .eyebrow{margin-bottom:22px}
+.hero .intro{max-width:570px;margin-top:24px}
+@media(min-width:900px){.hero-copy{padding-right:0}.hero-title{font-size:clamp(112px,13.4vw,205px)}}
+@media(max-width:650px){.hero-copy{padding-top:58px;padding-bottom:24px}.hero-title{font-size:clamp(58px,14vw,92px);letter-spacing:-.075em}.hero-title span:last-child{font-size:.91em;letter-spacing:-.07em}.hero-name{font-size:clamp(20px,5.5vw,30px);margin-top:18px}.hero .eyebrow{margin-bottom:20px}.hero .intro{font-size:12px;margin-top:20px}.hero-foot{font-size:7px}}
