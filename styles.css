@@ -495,3 +495,7 @@ footer>span,footer .back-top{font-family:'IBM Plex Mono',monospace;font-size:9px
 /* Use a variable-weight font so the hero title can actually become lighter */
 .hero-title{font-family:'DM Sans',Arial,sans-serif;font-weight:650 !important;-webkit-text-stroke:0 transparent}
 @media(max-width:650px){.hero-title{font-weight:650 !important}}
+
+
+/* Lighter navbar monogram */
+.topbar .brand{font-family:'DM Sans',Arial,sans-serif;font-weight:600;letter-spacing:-.07em}
