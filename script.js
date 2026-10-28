@@ -15,10 +15,34 @@ document.querySelectorAll("[data-project]").forEach(card => {
     dialogContent.innerHTML = `${project.video ? `<video class="dialog-video" src="${project.video}" controls autoplay playsinline preload="metadata" aria-label="${project.alt}"></video>` : `<img src="${project.image}" alt="${project.alt}">`}<div class="dialog-body"><p class="eyebrow">${project.category}</p><h3>${project.title}</h3><p>${project.description}</p><a class="dialog-link" href="mailto:pramod.s.works@gmail.com?subject=${encodeURIComponent("Project enquiry — " + project.title)}">Discuss a similar project ↗</a>${project.video ? "" : `<p><small>Artwork shown is concept artwork; replace with approved project stills for a production portfolio.</small></p>`}</div>`;
     dialog.showModal();
   };
-  card.querySelector("button")?.addEventListener("click", open);
+  card.querySelector(".project-image")?.addEventListener("click", open);
 });
 dialog.querySelector(".dialog-close").addEventListener("click", () => dialog.close());
 dialog.addEventListener("click", event => { if (event.target === dialog) dialog.close(); });
+
+document.querySelectorAll("[data-video-toggle]").forEach(control => {
+  const card = control.closest(".project-card");
+  const video = card?.querySelector(".project-image video");
+  if (!video) return;
+  const updateControl = () => {
+    const playing = !video.paused;
+    control.innerHTML = playing ? "Ⅱ <span>Pause</span>" : "▶ <span>Play</span>";
+    control.setAttribute("aria-label", (playing ? "Pause " : "Play ") + (video.getAttribute("aria-label") || "project video"));
+  };
+  control.addEventListener("click", async event => {
+    event.stopPropagation();
+    if (video.paused) {
+      document.querySelectorAll(".project-image video").forEach(other => {
+        if (other !== video) { other.pause(); const otherControl = other.closest(".project-card")?.querySelector("[data-video-toggle]"); if (otherControl) { otherControl.innerHTML = "▶ <span>Play</span>"; otherControl.setAttribute("aria-label", "Play project video"); } }
+      });
+      try { await video.play(); } catch (error) { control.innerHTML = "▶ <span>Play</span>"; }
+    } else video.pause();
+    updateControl();
+  });
+  video.addEventListener("play", updateControl);
+  video.addEventListener("pause", updateControl);
+});
+
 document.querySelector("#year").textContent = new Date().getFullYear();
 const revealItems = document.querySelectorAll(".project-card,.about-left,.about-right,.timeline-item,.extras > div,.section-head,.work-footer");
 revealItems.forEach(item => item.classList.add("reveal"));
