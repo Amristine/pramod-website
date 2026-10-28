@@ -11,11 +11,24 @@ const dialogContent = dialog.querySelector(".dialog-content");
 document.querySelectorAll("[data-project]").forEach(card => {
   const open = () => {
     const project = projects[card.dataset.project];
-    if (!project) return;
-    dialogContent.innerHTML = `${project.video ? `<video class="dialog-video" src="${project.video}" controls autoplay playsinline preload="metadata" aria-label="${project.alt}"></video>` : `<img src="${project.image}" alt="${project.alt}">`}<div class="dialog-body"><p class="eyebrow">${project.category}</p><h3>${project.title}</h3><p>${project.description}</p><a class="dialog-link" href="mailto:pramod.s.works@gmail.com?subject=${encodeURIComponent("Project enquiry — " + project.title)}">Discuss a similar project ↗</a>${project.video ? "" : `<p><small>Artwork shown is concept artwork; replace with approved project stills for a production portfolio.</small></p>`}</div>`;
+    if (!project || project.video) return;
+    dialogContent.innerHTML = `<img src="${project.image}" alt="${project.alt}"><div class="dialog-body"><p class="eyebrow">${project.category}</p><h3>${project.title}</h3><p>${project.description}</p><a class="dialog-link" href="mailto:pramod.s.works@gmail.com?subject=${encodeURIComponent("Project enquiry — " + project.title)}">Discuss a similar project ↗</a><p><small>Artwork shown is concept artwork; replace with approved project stills for a production portfolio.</small></p></div>`;
     dialog.showModal();
   };
-  card.querySelector(".project-image")?.addEventListener("click", open);
+  card.querySelector(".project-image")?.addEventListener("click", event => {
+    if (event.target.closest(".yt-controls")) return;
+    const video = card.querySelector(".project-image video");
+    if (video) {
+      event.preventDefault();
+      event.stopPropagation();
+      if (video.paused) {
+        document.querySelectorAll(".project-image video").forEach(other => { if (other !== video) other.pause(); });
+        video.play().catch(() => {});
+      } else video.pause();
+      return;
+    }
+    open();
+  });
 });
 dialog.querySelector(".dialog-close").addEventListener("click", () => dialog.close());
 dialog.addEventListener("click", event => { if (event.target === dialog) dialog.close(); });
