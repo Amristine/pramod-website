@@ -490,3 +490,8 @@ footer>span,footer .back-top{font-family:'IBM Plex Mono',monospace;font-size:9px
 
 /* Reduce AI FILMMAKER title weight by another 100 */
 .hero-title{font-weight:450}
+
+
+/* Use a variable-weight font so the hero title can actually become lighter */
+.hero-title{font-family:'DM Sans',Arial,sans-serif;font-weight:500 !important;-webkit-text-stroke:0 transparent}
+@media(max-width:650px){.hero-title{font-weight:500 !important}}
