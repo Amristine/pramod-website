@@ -20,27 +20,48 @@ document.querySelectorAll("[data-project]").forEach(card => {
 dialog.querySelector(".dialog-close").addEventListener("click", () => dialog.close());
 dialog.addEventListener("click", event => { if (event.target === dialog) dialog.close(); });
 
-document.querySelectorAll("[data-video-toggle]").forEach(control => {
-  const card = control.closest(".project-card");
-  const video = card?.querySelector(".project-image video");
-  if (!video) return;
-  const updateControl = () => {
-    const playing = !video.paused;
-    control.innerHTML = playing ? "Ⅱ <span>Pause</span>" : "▶ <span>Play</span>";
-    control.setAttribute("aria-label", (playing ? "Pause " : "Play ") + (video.getAttribute("aria-label") || "project video"));
+document.querySelectorAll(".project-image video").forEach(video => {
+  const card = video.closest(".project-card");
+  const playButton = card?.querySelector("[data-inline-play]");
+  const progress = card?.querySelector("[data-progress]");
+  const timeLabel = card?.querySelector("[data-time]");
+  if (!playButton || !progress || !timeLabel) return;
+  const formatTime = seconds => Number.isFinite(seconds) ? Math.floor(seconds / 60) + ":" + Math.floor(seconds % 60).toString().padStart(2, "0") : "0:00";
+  const update = () => {
+    playButton.textContent = video.paused ? "▶" : "Ⅱ";
+    playButton.setAttribute("aria-label", video.paused ? "Play video" : "Pause video");
+    if (Number.isFinite(video.duration) && video.duration > 0) {
+      progress.value = Math.round(video.currentTime / video.duration * 1000);
+      progress.style.setProperty("--progress", (video.currentTime / video.duration * 100) + "%");
+      timeLabel.textContent = formatTime(video.currentTime) + " / " + formatTime(video.duration);
+    } else timeLabel.textContent = formatTime(video.currentTime);
   };
-  control.addEventListener("click", async event => {
+  playButton.addEventListener("click", async event => {
     event.stopPropagation();
-    if (video.paused) {
-      document.querySelectorAll(".project-image video").forEach(other => {
-        if (other !== video) { other.pause(); const otherControl = other.closest(".project-card")?.querySelector("[data-video-toggle]"); if (otherControl) { otherControl.innerHTML = "▶ <span>Play</span>"; otherControl.setAttribute("aria-label", "Play project video"); } }
-      });
-      try { await video.play(); } catch (error) { control.innerHTML = "▶ <span>Play</span>"; }
-    } else video.pause();
-    updateControl();
+    document.querySelectorAll(".project-image video").forEach(other => {
+      if (other !== video) {
+        other.pause();
+        const otherButton = other.closest(".project-card")?.querySelector("[data-inline-play]");
+        if (otherButton) { otherButton.textContent = "▶"; otherButton.setAttribute("aria-label", "Play video"); }
+      }
+    });
+    if (video.paused) { try { await video.play(); } catch (error) {} } else video.pause();
+    update();
   });
-  video.addEventListener("play", updateControl);
-  video.addEventListener("pause", updateControl);
+  progress.addEventListener("click", event => event.stopPropagation());
+  progress.addEventListener("input", event => {
+    event.stopPropagation();
+    if (Number.isFinite(video.duration) && video.duration > 0) {
+      video.currentTime = Number(progress.value) / 1000 * video.duration;
+      update();
+    }
+  });
+  video.addEventListener("timeupdate", update);
+  video.addEventListener("loadedmetadata", update);
+  video.addEventListener("play", update);
+  video.addEventListener("pause", update);
+  video.addEventListener("ended", update);
+  update();
 });
 
 document.querySelector("#year").textContent = new Date().getFullYear();
