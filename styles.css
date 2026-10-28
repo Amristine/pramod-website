@@ -378,3 +378,7 @@ footer>span,footer .back-top{font-family:'IBM Plex Mono',monospace;font-size:9px
   .hero-title span:first-child,
   .hero-title span:last-child{letter-spacing:-.055em}
 }
+
+
+/* Slightly lighter weight for the AI FILMMAKER wordmark */
+.hero-title{font-weight:750}
