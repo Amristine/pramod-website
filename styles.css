@@ -386,3 +386,7 @@ footer>span,footer .back-top{font-family:'IBM Plex Mono',monospace;font-size:9px
 
 /* Further soften the AI FILMMAKER title weight */
 .hero-title{font-weight:650}
+
+
+/* Reduce hero title weight by another 100 */
+.hero-title{font-weight:550}
