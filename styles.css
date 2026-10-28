@@ -150,3 +150,35 @@ footer p{color:#aaa99f}
  .contact h2{font-size:clamp(61px,14vw,86px);letter-spacing:-.08em}
  footer{border-top:1px solid var(--line)}
 }
+
+
+/* Updated palette: deep neutral charcoal, warm whites, restrained silver accents */
+:root{
+  --bg:#0d0f12;
+  --panel:#14171b;
+  --ink:#f4f4f2;
+  --muted:#a5aab2;
+  --line:rgba(232,236,242,.13);
+  --acid:#c9d1dc;
+}
+body{background:#0d0f12;color:#f4f4f2}
+.topbar{background:rgba(13,15,18,.94);border-color:rgba(232,236,242,.13)}
+.brand span,.hero h1 span{color:#c9d1dc}
+.primary{background:#e8ebef;color:#101216}
+.hero-art:before{background:linear-gradient(90deg,rgba(8,10,13,.9) 0%,rgba(8,10,13,.68) 35%,rgba(8,10,13,.25) 72%,rgba(8,10,13,.16) 100%),linear-gradient(0deg,rgba(8,10,13,.68),transparent 36%,rgba(8,10,13,.14))}
+.hero-art .art-caption{color:rgba(245,246,248,.76)}
+.project-meta>span,.work-footer b,.timeline-company,.timeline-mark{color:#c9d1dc}
+.about{background:#13161a;border-color:rgba(232,236,242,.13)}
+.about-stamp{border-color:rgba(201,209,220,.42);color:#c9d1dc}
+.chips span{border-color:rgba(232,236,242,.16);color:#dedfe3;background:rgba(255,255,255,.02)}
+.chips.muted span{color:#a5aab2}
+.timeline,.timeline-item,.work-footer{border-color:rgba(232,236,242,.13)}
+.contact{background:#e6e9ed;color:#15181d}
+.contact .eyebrow{color:#525c68}
+.contact h2 em{color:#677382}
+.contact-intro,.contact-details{color:#515a66}
+.contact-email{border-color:rgba(20,24,30,.28)}
+.video-toggle:hover{background:#e8ebef;border-color:#e8ebef;color:#101216}
+.open-icon{background:#e8ebef;color:#101216}
+footer{background:#0d0f12;border-color:rgba(232,236,242,.13)}
+::selection{background:#c9d1dc;color:#101216}
