@@ -344,3 +344,37 @@ footer>span,footer .back-top{font-family:'IBM Plex Mono',monospace;font-size:9px
 .yt-progress:focus-visible{outline:2px solid #fff;outline-offset:4px}
 .yt-time{flex:0 0 auto;font:10px 'IBM Plex Mono',monospace;color:rgba(255,255,255,.92);white-space:nowrap;font-variant-numeric:tabular-nums}
 @media(max-width:650px){.yt-controls{opacity:1;gap:7px;padding:25px 9px 9px}.yt-play{width:25px;height:25px;flex-basis:25px}.yt-time{font-size:8px}}
+
+
+/* Stronger, cleaner hero typography */
+.hero-title{
+  font-family: "Arial Black", "Archivo", Arial, sans-serif;
+  font-weight: 900;
+  font-size: clamp(88px, 11.2vw, 158px);
+  line-height: .88;
+  letter-spacing: -.055em;
+  color: #fff;
+  text-shadow: 0 2px 22px rgba(0,0,0,.18);
+}
+.hero-title span:first-child,
+.hero-title span:last-child{
+  font-size: 1em;
+  letter-spacing: -.055em;
+}
+.hero-title span:last-child{
+  transform: scaleX(.98);
+  transform-origin: left center;
+}
+@media (min-width: 901px){
+  .hero-title{font-size:clamp(94px,10.4vw,154px)}
+}
+@media (max-width: 650px){
+  .hero-title{
+    font-family: "Arial Black", "Archivo", Arial, sans-serif;
+    font-size:clamp(56px,13.2vw,82px);
+    line-height:.9;
+    letter-spacing:-.055em;
+  }
+  .hero-title span:first-child,
+  .hero-title span:last-child{letter-spacing:-.055em}
+}
